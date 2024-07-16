@@ -16,7 +16,7 @@ model:
     sample_rate: ${model.sample_rate}
     batch_size: 32 # you may increase batch_size if your memory allows
     shuffle: true
-    num_workers: 8
+    num_workers: 4
     pin_memory: true
     max_duration: 20
     min_duration: 0.1
@@ -46,14 +46,18 @@ model:
     num_workers: 4
     pin_memory: true
   
-  char_labels: # use for char based models
-    update_labels: false
-    labels: null # example list config: \[' ', 'a', 'b', 'c'\]
+  char_labels:
+    update_labels: true
+    labels: [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-  tokenizer: # use for spe/bpe based tokenizer models
+  tokenizer:
     update_tokenizer: true
-    dir: /kaggle/working/Wav2Vec2_CTC/dict_N/tokenizer_spe_char_v512_pad_bos_eos  # path to directory which contains either tokenizer.model (bpe) or vocab.txt (for wpe)
-    type: char  # Can be either bpe (SentencePiece tokenizer) or wpe (WordPiece tokenizer)
+    dir: /kaggle/working/Wav2Vec2_CTC/dict_N/tokenizer_spe_char_v512_pad_bos_eos
+    type: char
+
+  preprocessor: # Add preprocessor configuration
+    _target_: nemo.collections.asr.modules.EncDecCTCModel
+    labels: ${model.char_labels.labels}
 
   spec_augment:
     _target_: nemo.collections.asr.modules.SpectrogramAugmentation
