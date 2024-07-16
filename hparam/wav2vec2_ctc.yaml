@@ -4,7 +4,7 @@
 
 # kernel: \[([0-9]+)\]
 # filters: ([0-9]+)
-name: &name "Wav2vec_Pretrain"
+name: &name "Wav2vec2_CTC"
 
 model:
   sample_rate: &sample_rate 16000
