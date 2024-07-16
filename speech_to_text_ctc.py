@@ -77,7 +77,7 @@ from nemo.utils import logging
 from nemo.utils.exp_manager import exp_manager
 
 
-@hydra_runner(config_path="/kaggle/working/Wav2Vec2_CTC/hparam", config_name="wav2vec2_ctc")
+@hydra_runner(config_path="/kaggle/working/Wav2Vec2_CTC/hparam", config_name="speech_to_text_finetune")
 def main(cfg):
     logging.info(f'Hydra config: {OmegaConf.to_yaml(cfg)}')
 
